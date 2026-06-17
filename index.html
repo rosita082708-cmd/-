@@ -70,26 +70,38 @@ function unlock(){
 }
 
 async function sendAnswer(randomFile){
-  const data={
-    student:document.getElementById("student").value,
-    room:document.getElementById("room").value,
-    randomFile,
-    q1:document.getElementById("q1").value,
-    q2:document.getElementById("q2").value,
-    q3:document.getElementById("q3").value,
-    q4:document.getElementById("q4").value,
-    userAgent:navigator.userAgent
+
+  const data = {
+    student: document.getElementById("student").value,
+    room: document.getElementById("room").value,
+    randomFile: randomFile,
+    q1: document.getElementById("q1").value,
+    q2: document.getElementById("q2").value,
+    q3: document.getElementById("q3").value,
+    q4: document.getElementById("q4").value,
+    userAgent: navigator.userAgent
   };
+
   try{
+
     await fetch(WEBAPP_URL,{
       method:"POST",
-      headers:{"Content-Type":"application/json"},
+      mode:"no-cors",
       body:JSON.stringify(data)
     });
-    document.getElementById("status").innerHTML="<p style='color:green'>✅ ส่งข้อมูลเรียบร้อย</p>";
+
+    document.getElementById("status").innerHTML =
+    "<p style='color:green'>✅ ส่งข้อมูลเรียบร้อย</p>";
+
   }catch(e){
-    document.getElementById("status").innerHTML="<p style='color:red'>❌ ส่งข้อมูลไม่สำเร็จ</p>";
+
+    console.error(e);
+
+    document.getElementById("status").innerHTML =
+    "<p style='color:red'>❌ ส่งข้อมูลไม่สำเร็จ</p>";
+
   }
+
 }
 </script>
 </body>
